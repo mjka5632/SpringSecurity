@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.imooc.exception.UserNotExistException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -14,7 +13,6 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonView;

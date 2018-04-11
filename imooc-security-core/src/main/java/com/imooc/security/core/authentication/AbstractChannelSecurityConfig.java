@@ -6,7 +6,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
+/**
+ * 密码登录 配置
+ */
 public class AbstractChannelSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired

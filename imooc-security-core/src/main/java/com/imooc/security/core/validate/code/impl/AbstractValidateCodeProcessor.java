@@ -15,6 +15,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Map;
 
+/**
+ * 实现验证码 【基础流程】
+ * @param <C>
+ */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
     /**
      * Spring 启动时会查找带有ValidateCodeGenerator(可以前后加其他的字母)接口类的实现
@@ -23,8 +27,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Autowired
     private Map<String,ValidateCodeGenerator> validateCodeGenerators;
 
-//    @Autowired
-//    private ValidateCodeRepository validateCodeRepository;
+
     /**
      * 操作Session的工具类
      */

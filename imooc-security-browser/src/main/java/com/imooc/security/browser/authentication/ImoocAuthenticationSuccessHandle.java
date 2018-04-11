@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -43,11 +42,11 @@ public class ImoocAuthenticationSuccessHandle extends SavedRequestAwareAuthentic
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("登录成功");
-        /**
-         *  设置
-         * 返回格式Json
-         * or
-         * 直接跳转
+        /*
+           设置
+          返回格式Json
+          or
+          直接跳转
          */
         if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
         //如果该方法在getWriter()方法被调用之前调用，那么响应的字符编码将仅从给出的内容类型中设置。

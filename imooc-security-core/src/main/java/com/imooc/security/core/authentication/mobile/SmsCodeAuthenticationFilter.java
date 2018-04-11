@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
     public static final String IMOOC_FROM_MOBILE_KEY = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;
     private String mobileParameter = IMOOC_FROM_MOBILE_KEY;
     //是否只处理Post请求
@@ -21,13 +22,25 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
      * 匹配URL请求
      */
     public SmsCodeAuthenticationFilter() {
-        super(new AntPathRequestMatcher("/authentication/mobile", "POST"));
+        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, "POST"));
     }
 
+    /**
+     * 继承AbstractAuthenticationProcessingFilter的抽象方法
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws AuthenticationException
+     */
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+
         if (this.postOnly && !request.getMethod().equals("POST")) {
+
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+
         } else {
+
             String mobile = obtainMobile(request);
 
             if (mobile == null) {

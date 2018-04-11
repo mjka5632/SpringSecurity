@@ -13,11 +13,10 @@ public class MyConstraintValidator implements ConstraintValidator<MyConstraint,O
     public void initialize(MyConstraint myConstraint) {
         System.out.println("my Constraint init");
     }
-
-    @Override
     /**
      * o代表我们写的message的值
      */
+    @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         helloService.greeting("tom");
         System.out.println("Value"+o);

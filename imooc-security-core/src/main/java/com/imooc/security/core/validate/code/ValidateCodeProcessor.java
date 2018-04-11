@@ -3,7 +3,7 @@ package com.imooc.security.core.validate.code;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * 封装不同验证码的处理逻辑
+ * 封装验证码逻辑
  */
 public interface ValidateCodeProcessor {
 

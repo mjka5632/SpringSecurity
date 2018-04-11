@@ -1,21 +1,19 @@
 package com.imooc.security.browser.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 /**
  * Created by mrt on 2017/11/23.
  */
 //jpa数据自动生成表及字段
-@Entity(name = "User")
+@Entity(name = "users")
 public class TUser implements UserDetails{
     //设置ID并自动增长
     @Id
@@ -28,6 +26,26 @@ public class TUser implements UserDetails{
     private String password;
 //    @NotNull(message = "金额必传")
     private Integer role;
+
+    private String telPhone;
+
+    public String getTelPhone() {
+        return telPhone;
+    }
+
+    public void setTelPhone(String telPhone) {
+        this.telPhone = telPhone;
+    }
+
+    public TUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+        AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
+    }
+
+    public TUser() {
+
+    }
 
     public TUser(String username, String password, boolean b, boolean b1, boolean b2, boolean b3, Collection<? extends GrantedAuthority> authorities) {
     }

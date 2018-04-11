@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 校验码处理器管理器
+ * 校验码处理器【管理器】
  *
  * @author zhailiang
  *

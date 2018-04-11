@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.dto;
 
 import io.swagger.annotations.ApiModelProperty;

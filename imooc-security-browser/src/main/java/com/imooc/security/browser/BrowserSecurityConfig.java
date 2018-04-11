@@ -6,8 +6,10 @@ import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +27,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     //IDE错误，此处忽略
     @Autowired
     private DataSource dataSource;
+    /**
+     * 指定UserDetailsService接口的实现类
+     */
     @Autowired
+    @Qualifier("myUserDetailsService")
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -36,7 +42,19 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
 
     /**
+     * 配置表单登录UserDetailsService的实现并设置加密方式
+     * 【此处不设置将会走默认实现方式，导致我们出现错误
+     * 详情请看 实现UserDetailsService达成用户名登录和短信登录的问答】
      *
+     * @param auth
+     * @throws Exception
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    /**
      * @param http
      * @throws Exception
      */
@@ -45,13 +63,13 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
         applyPassowrdAuthenticationConfig(http);
         //导入配置
-        http.apply(validateCodeSecurityConfig)
-                .and()
-        //--------------身份认证
+        http.apply(validateCodeSecurityConfig).and()
+                //--------------身份认证
                 .apply(smsCodeAuthenticationSecurityConfig)
 
                 .and()
-                //记住我功能
+                //------------以下浏览器特有配置--------------
+                // 记住我功能
                 .rememberMe()
                 //设置数据库Token
                 .tokenRepository(persistentTokenRepository())
@@ -65,17 +83,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 //--------对请求做授权(下面都是对授权的配置)
                 .authorizeRequests()
                 //这个url无需认证
-                .antMatchers(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*")
-                .permitAll()
+                .antMatchers(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, SecurityConstants.DEFAULT_UNAUTHENTICATION_URL, securityProperties.getBrowser().getLoginPage(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
                 //任何请求
                 .anyRequest()
 
                 //都需要做身份认证
-                .authenticated()
-                .and()
+                .authenticated().and()
                 //跨站请求防护
                 .csrf().disable()
 
@@ -85,10 +98,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     /**
      * 记住我功能
      * Token存取器配置
+     *
      * @return
      */
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
 
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
@@ -96,12 +110,14 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 //        tokenRepository.setCreateTableOnStartup(true);
         return tokenRepository;
     }
+
     /**
      * 密码加密
+     *
      * @return
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         //BCryptPasswordEncoder实现了 PasswordEncoder 接口
         //如果有自己的加密密码方式，返回自己的实现PasswordEncoder的实现类
         return new BCryptPasswordEncoder();

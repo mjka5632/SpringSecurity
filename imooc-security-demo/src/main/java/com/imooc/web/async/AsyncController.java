@@ -63,15 +63,11 @@ public class AsyncController {
     @RequestMapping("/asyncOrder")
     public Callable<String> Aorder() throws Exception {
         logger.info("主线程开始");
-        Callable<String> result = new Callable<String>() {
-
-            @Override
-            public String call() throws Exception {
-                logger.info("副线程开始");
-                Thread.sleep(1000);
-                logger.info("副线程返回");
-                return "success";
-            }
+        Callable<String> result = () -> {
+            logger.info("副线程开始");
+            Thread.sleep(1000);
+            logger.info("副线程返回");
+            return "success";
         };
         logger.info("主线返回");
         return result;

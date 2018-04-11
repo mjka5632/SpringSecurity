@@ -1,9 +1,5 @@
 package com.imooc.web.controller;
 
-/**
- *
- */
-
 import com.imooc.dto.FileInfo;
 
 import org.apache.commons.io.IOUtils;

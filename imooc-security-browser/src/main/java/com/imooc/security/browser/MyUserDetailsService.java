@@ -1,45 +1,56 @@
 package com.imooc.security.browser;
 
-import com.imooc.security.browser.dao.UserRepository;
 import com.imooc.security.browser.domain.TUser;
+import com.imooc.security.browser.service.ValidateRepoMethodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * 用户名密码登录
+ */
 @Component
 public class MyUserDetailsService implements UserDetailsService {
-    private Logger logger= LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
+    private ValidateRepoMethodService method;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        TUser user = userRepository.findByUsername(username);
-//        if (girl != null) {
-//            logger.info("success");
-//        }
-//        System.out.println(girl.getAge());
-//        logger.info(girl.toString());
-        //此处应该跟数据库获取
-//        logger.info("登录用户名："+user.getUsername());
-//        logger.info("密码："+passwordEncoder.encode(user.getPassword()));
-                logger.info("登录用户名："+username);
-        logger.info("密码："+passwordEncoder.encode("1"));
-        return new User(username,passwordEncoder.encode("1"), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-        //passwordEncoder.encode("123456")应该为注册的时候写入数据库的
-//        return User(user.getUsername(),passwordEncoder.encode(user.getUsername()), true,true,true,true,AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-//        return user;
+        TUser user = method.validateRepoMethod(getClass().getSimpleName(), username);
+        if (user != null) {
+            logger.info("登录用户名：" + user.getUsername());
+//            logger.info("密码："+passwordEncoder.encode(user.getPassword()));
+            logger.info("密码：" + user.getPassword());
+            logger.info("User---->{}", user.toString());
+
+            return new User(user.getUsername(), user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        }
+
+        user.setUsername("查无此人");
+
+
+        logger.info("User---->{}", user.toString());
+        return user;
     }
 
+    /**
+     * 密码是否匹配
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        boolean a = bCryptPasswordEncoder.matches("1", "$2a$10$aZyzW0Fv/4SYAyhKsIcGueTDIjBf0Xfg45KCgpbcXRKaezaiUDIJq");
+        System.out.println(a);
 
+    }
 }
