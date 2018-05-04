@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -40,6 +41,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
+    @Autowired
+    private SpringSocialConfigurer imoocSocialSecurityConfig;
+
 
     /**
      * 配置表单登录UserDetailsService的实现并设置加密方式
@@ -63,10 +67,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
         applyPassowrdAuthenticationConfig(http);
         //导入配置
-        http.apply(validateCodeSecurityConfig).and()
+        http.apply(validateCodeSecurityConfig)
+                .and()
                 //--------------身份认证
                 .apply(smsCodeAuthenticationSecurityConfig)
-
+                .and()
+                .apply(imoocSocialSecurityConfig)
                 .and()
                 //------------以下浏览器特有配置--------------
                 // 记住我功能
@@ -83,7 +89,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 //--------对请求做授权(下面都是对授权的配置)
                 .authorizeRequests()
                 //这个url无需认证
-                .antMatchers(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, SecurityConstants.DEFAULT_UNAUTHENTICATION_URL, securityProperties.getBrowser().getLoginPage(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
+                .antMatchers(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
+                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
+                        securityProperties.getBrowser().getSignUpUrl(),
+                        securityProperties.getBrowser().getLoginPage(),
+                        "/user/regist",
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
                 //任何请求
                 .anyRequest()
 

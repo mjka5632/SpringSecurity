@@ -1,4 +1,4 @@
-package com.imooc.security.browser;
+package com.imooc.security;
 
 import com.imooc.security.browser.domain.TUser;
 import com.imooc.security.browser.service.ValidateRepoMethodService;
@@ -11,13 +11,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
- * 用户名密码登录
+ * 登录逻辑
  */
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService, SocialUserDetailsService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -42,6 +45,14 @@ public class MyUserDetailsService implements UserDetailsService {
         return user;
     }
 
+    @Override
+    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
+        logger.info("社交登录ID：" + userId);
+//        return new SocialUser(userId,user.getPassword(),AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return new SocialUser(userId, "1", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+    }
+
+
     /**
      * 密码是否匹配
      *
@@ -53,4 +64,6 @@ public class MyUserDetailsService implements UserDetailsService {
         System.out.println(a);
 
     }
+
+
 }

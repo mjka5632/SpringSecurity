@@ -5,13 +5,22 @@ package com.imooc.security.core.properties;
  * 模块配置项
  */
 public class BrowserProperties {
+    //默认注册页
+    private String signUpUrl = "/imooc-signUp.html";
     //默认处理
-    private String loginPage="/imooc-Sign.html";
+    private String loginPage = "/imooc-Sign.html";
     //默认登录结果返回Json
-    private LoginType loginType=LoginType.JSON;
+    private LoginType loginType = LoginType.JSON;
     //记住我Token保存的时效
-    private int rememberMeSeconds=3600;
+    private int rememberMeSeconds = 3600;
 
+    public String getSignUpUrl() {
+        return signUpUrl;
+    }
+
+    public void setSignUpUrl(String signUpUrl) {
+        this.signUpUrl = signUpUrl;
+    }
 
     public int getRememberMeSeconds() {
         return rememberMeSeconds;

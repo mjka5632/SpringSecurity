@@ -7,17 +7,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 封装系统配置文件
  *
- *
- * @ConfigurationProperties
- * 表示读取所有以imooc.security开头的配置项
+ * @ConfigurationProperties 表示读取所有以imooc.security开头的配置项
  */
 
-@ConfigurationProperties(prefix ="imooc.security" )
+@ConfigurationProperties(prefix = "imooc.security")
 public class SecurityProperties {
     //读取以imooc.security.browser开头的配置
-    private BrowserProperties browser=new BrowserProperties();
+    private BrowserProperties browser = new BrowserProperties();
 
-    private ValidateCodeProperties code=new ValidateCodeProperties();
+    private ValidateCodeProperties code = new ValidateCodeProperties();
+
+    private SocialProperties social = new SocialProperties();
+
 
     public ValidateCodeProperties getCode() {
         return code;
@@ -25,6 +26,14 @@ public class SecurityProperties {
 
     public void setCode(ValidateCodeProperties code) {
         this.code = code;
+    }
+
+    public SocialProperties getSocial() {
+        return social;
+    }
+
+    public void setSocial(SocialProperties social) {
+        this.social = social;
     }
 
     public BrowserProperties getBrowser() {
