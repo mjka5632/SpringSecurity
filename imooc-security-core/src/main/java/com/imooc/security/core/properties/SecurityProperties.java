@@ -19,7 +19,6 @@ public class SecurityProperties {
 
     private SocialProperties social = new SocialProperties();
 
-
     public ValidateCodeProperties getCode() {
         return code;
     }

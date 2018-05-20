@@ -58,4 +58,16 @@ public interface SecurityConstants {
      * 获取第三方用户信息的url
      */
     String DEFAULT_SOCIAL_USER_INFO_URL = "/social/user";
+    /**
+     * 获取用过个人信息
+     */
+    String DEFAULT_USER_INFO = "user/me";
+    /**
+     * 用户注册URL
+     */
+    String DEFAULT_USER_REGIST = "/user/regist";
+    /**
+     * SESSION过期URL
+     */
+    String DEFAULT_SESSION_INVALID = "/session/invalid";
 }

@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 
 /**
  * 图形验证码
- *
+ * <p>
  * 是验证码的子类
- *多了一个图片的属性
+ * 多了一个图片的属性
  */
-public class ImageCode extends ValidateCode{
+public class ImageCode extends ValidateCode {
+
     private BufferedImage image;
 
     /**
@@ -19,7 +20,7 @@ public class ImageCode extends ValidateCode{
      * @param expireIn 传入的是过期的时间间隔
      */
     public ImageCode(BufferedImage image, String code, int expireIn) {
-        super(code,expireIn);
+        super(code, expireIn);
         this.image = image;
     }
 
@@ -30,10 +31,6 @@ public class ImageCode extends ValidateCode{
     public void setImage(BufferedImage image) {
         this.image = image;
     }
-
-
-
-
 
 
 }

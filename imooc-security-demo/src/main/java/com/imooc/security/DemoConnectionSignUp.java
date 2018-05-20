@@ -15,7 +15,9 @@ public class DemoConnectionSignUp implements ConnectionSignUp {
     public String execute(Connection<?> connection) {
         //根据社交用户信息创建用户唯一标示
         //这里会把数据库的社交返回返回得到的providerUserId设置到UserID中
-        return connection.getKey().getProviderUserId();
+//        return connection.getKey().getProviderUserId();
+        //昵称放入UserId中
+        return connection.getDisplayName();
 
     }
 }

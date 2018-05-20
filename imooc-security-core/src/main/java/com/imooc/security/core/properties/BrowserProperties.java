@@ -5,6 +5,8 @@ package com.imooc.security.core.properties;
  * 模块配置项
  */
 public class BrowserProperties {
+    //session
+    private SessionProperties session= new SessionProperties();
     //默认注册页
     private String signUpUrl = "/imooc-signUp.html";
     //默认处理
@@ -13,6 +15,24 @@ public class BrowserProperties {
     private LoginType loginType = LoginType.JSON;
     //记住我Token保存的时效
     private int rememberMeSeconds = 3600;
+
+    private String signOutUrl;
+
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
+    }
+
+    public SessionProperties getSession() {
+        return session;
+    }
+
+    public void setSession(SessionProperties session) {
+        this.session = session;
+    }
 
     public String getSignUpUrl() {
         return signUpUrl;

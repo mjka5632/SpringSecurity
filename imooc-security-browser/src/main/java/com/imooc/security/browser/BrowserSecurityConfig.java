@@ -1,5 +1,6 @@
 package com.imooc.security.browser;
 
+import com.imooc.security.browser.session.ImoocConcurrencySessionStrategy;
 import com.imooc.security.core.authentication.AbstractChannelSecurityConfig;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.properties.SecurityConstants;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.social.security.SpringSocialConfigurer;
@@ -44,6 +46,10 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     @Autowired
     private SpringSocialConfigurer imoocSocialSecurityConfig;
 
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
+
 
     /**
      * 配置表单登录UserDetailsService的实现并设置加密方式
@@ -69,37 +75,55 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
         //导入配置
         http.apply(validateCodeSecurityConfig)
                 .and()
-                //--------------身份认证
-                .apply(smsCodeAuthenticationSecurityConfig)
+            //--------------身份认证
+            .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
-                .apply(imoocSocialSecurityConfig)
+            .apply(imoocSocialSecurityConfig)
                 .and()
-                //------------以下浏览器特有配置--------------
-                // 记住我功能
-                .rememberMe()
+            //------------以下浏览器特有配置--------------
+            // 记住我功能
+            .rememberMe()
                 //设置数据库Token
                 .tokenRepository(persistentTokenRepository())
                 //设置时效
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 //拿到User信息
                 .userDetailsService(userDetailsService)
+                .and()
+            .sessionManagement()
+                .invalidSessionUrl(securityProperties.getBrowser().getSession().getInvalidSessionUrl())
+                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                .expiredSessionStrategy(new ImoocConcurrencySessionStrategy(securityProperties.getBrowser().getSession().getInvalidSessionUrl()))
+                .and()
+                .and()
+            .logout()
+                .logoutUrl("/signOut")
+                .logoutSuccessHandler(logoutSuccessHandler)
+                //配置logoutSuccessHandler这个就不起作用了
+//                .logoutSuccessUrl("/imooc-logout.html")
+                .deleteCookies("JSESSIONID")
                 //basic方式
 //          http.httpBasic()
                 .and()
-                //--------对请求做授权(下面都是对授权的配置)
-                .authorizeRequests()
-                //这个url无需认证
+            //--------对请求做授权(下面都是对授权的配置)
+            .authorizeRequests()
+                //url无需认证
                 .antMatchers(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                         securityProperties.getBrowser().getSignUpUrl(),
                         securityProperties.getBrowser().getLoginPage(),
-                        "/user/regist",
+                        securityProperties.getBrowser().getSignOutUrl(),
+                        SecurityConstants.DEFAULT_SESSION_INVALID,
+                        SecurityConstants.DEFAULT_USER_INFO,
+                        SecurityConstants.DEFAULT_USER_REGIST,
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
                 //任何请求
-                .anyRequest()
+            .anyRequest()
 
                 //都需要做身份认证
-                .authenticated().and()
+                .authenticated()
+                .and()
                 //跨站请求防护
                 .csrf().disable()
 

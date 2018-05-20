@@ -25,7 +25,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
 
     @Autowired
     private ValidateRepoMethodService method;
-
+//用户名 admin 密码1
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         TUser user = method.validateRepoMethod(getClass().getSimpleName(), username);
@@ -38,11 +38,9 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
             return new User(user.getUsername(), user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         }
 
-        user.setUsername("查无此人");
+         throw new RuntimeException("not found user");
 
 
-        logger.info("User---->{}", user.toString());
-        return user;
     }
 
     @Override

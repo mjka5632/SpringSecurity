@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -33,6 +34,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 @RequestMapping("/user")
 @RestController
 public class UserController {
+    @Autowired
+    BeanFactory beanFactory;
 
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
