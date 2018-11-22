@@ -27,11 +27,11 @@ public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see
-     * org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter
+     *org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter
      * #createConnectionFactory()
      */
     @Override

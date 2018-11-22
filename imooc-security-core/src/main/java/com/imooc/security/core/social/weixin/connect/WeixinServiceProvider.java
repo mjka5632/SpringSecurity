@@ -32,7 +32,7 @@ public class WeixinServiceProvider extends AbstractOAuth2ServiceProvider<Weixin>
     }
 
 
-    /* (non-Javadoc)
+    /** (non-Javadoc)
      * @see org.springframework.social.oauth2.AbstractOAuth2ServiceProvider#getApi(java.lang.String)
      */
     @Override

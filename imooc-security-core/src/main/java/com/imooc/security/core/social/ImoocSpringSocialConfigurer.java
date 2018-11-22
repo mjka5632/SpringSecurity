@@ -17,7 +17,6 @@ public class ImoocSpringSocialConfigurer extends SpringSocialConfigurer {
         this.filterProcessesUrl = filterProcessesUrl;
     }
 
-    //
     @Override
     protected <T> T postProcess(T object) {
 

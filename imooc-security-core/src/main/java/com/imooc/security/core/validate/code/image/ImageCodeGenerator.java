@@ -10,14 +10,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-/**代码生成器
- * @Component没用这个注解
- * 是因为在ValidateCodeBeanConfig这里面配
+/**
+ * 代码生成器
+ *
+ * @Component没用这个注解 是因为在ValidateCodeBeanConfig这里面配
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
     @Autowired
     private SecurityProperties securityProperties;
+
     @Override
     public ImageCode generateCode(ServletWebRequest request) {
         /**
