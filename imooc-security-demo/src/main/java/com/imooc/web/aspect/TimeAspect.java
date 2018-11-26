@@ -16,10 +16,10 @@ public class TimeAspect {
         for(Object arg:args){
             System.out.println("arg is"+arg);
         }
-        long startTime = new Date().getTime();
+        long startTime = System.currentTimeMillis();
 
         Object proceed = pjp.proceed();
-        System.out.println("time aspect 耗时："+(new Date().getTime()-startTime));
+        System.out.println("time aspect 耗时："+(System.currentTimeMillis()-startTime));
         System.out.println("time aspect end");
         return proceed;
 

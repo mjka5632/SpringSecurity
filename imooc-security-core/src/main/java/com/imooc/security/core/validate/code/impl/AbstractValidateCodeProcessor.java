@@ -21,8 +21,7 @@ import java.util.Map;
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
     /**
-     * Spring 启动时会查找带有ValidateCodeGenerator(可以前后加其他的字母)接口类的实现
-     * 放在Map名中
+     * 收集系统中所有的 {@link ValidateCodeGenerator} 接口的实现。
      */
     @Autowired
     private Map<String,ValidateCodeGenerator> validateCodeGenerators;
@@ -100,6 +99,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      *
      * @param request
      */
+    @Override
     public void validate(ServletWebRequest request) {
 
         ValidateCodeType processorType = getValidateCodeType(request);

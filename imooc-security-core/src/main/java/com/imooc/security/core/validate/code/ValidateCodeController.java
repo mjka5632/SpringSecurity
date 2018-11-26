@@ -39,8 +39,8 @@ public class ValidateCodeController {
     /**
      * 短信供应商
      */
-    @Autowired
-    private SmsCodeSender smsCodeSender;
+   /* @Autowired
+    private SmsCodeSender smsCodeSender;*/
 
 
     /**

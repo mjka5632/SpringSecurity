@@ -34,3 +34,4 @@ imooc-security-authorize/.classpath
 *.factorypath
 /.idea/
 */*.iml
+/.gitignore
