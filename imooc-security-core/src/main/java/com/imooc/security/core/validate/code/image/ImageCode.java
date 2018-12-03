@@ -1,6 +1,7 @@
 package com.imooc.security.core.validate.code.image;
 
 import com.imooc.security.core.validate.code.sms.ValidateCode;
+import lombok.Data;
 
 import java.awt.image.BufferedImage;
 
@@ -10,6 +11,7 @@ import java.awt.image.BufferedImage;
  * 是验证码的子类
  * 多了一个图片的属性
  */
+@Data
 public class ImageCode extends ValidateCode {
 
     private BufferedImage image;
@@ -23,14 +25,5 @@ public class ImageCode extends ValidateCode {
         super(code, expireIn);
         this.image = image;
     }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
 
 }

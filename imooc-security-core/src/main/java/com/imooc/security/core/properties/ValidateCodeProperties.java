@@ -1,8 +1,11 @@
 package com.imooc.security.core.properties;
 
+import lombok.Data;
+
 /**
  * 验证码相关配置
  */
+@Data
 public class ValidateCodeProperties {
     /**
      * 图形验证码
@@ -14,20 +17,4 @@ public class ValidateCodeProperties {
      */
     private SmsCodeProperties sms=new SmsCodeProperties();
 
-    public SmsCodeProperties getSms() {
-        return sms;
-    }
-
-    public void setSms(SmsCodeProperties sms) {
-        this.sms = sms;
-    }
-
-
-    public ImageCodeProperties getImage() {
-        return image;
-    }
-
-    public void setImage(ImageCodeProperties image) {
-        this.image = image;
-    }
 }

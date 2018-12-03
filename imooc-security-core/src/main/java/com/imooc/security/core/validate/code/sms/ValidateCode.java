@@ -1,11 +1,14 @@
 package com.imooc.security.core.validate.code.sms;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 验证码
  */
+@Data
 public class ValidateCode implements Serializable {
 
     private String code;
@@ -26,19 +29,4 @@ public class ValidateCode implements Serializable {
         this.expireTime =expireTime;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public LocalDateTime getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(LocalDateTime expireTime) {
-        this.expireTime = expireTime;
-    }
 }

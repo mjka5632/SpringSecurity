@@ -1,5 +1,6 @@
 package com.imooc.security.browser.domain;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import java.util.Collection;
  */
 //jpa数据自动生成表及字段
 @Entity(name = "users")
+@Data
 public class TUser implements UserDetails{
     //设置ID并自动增长
     @Id
@@ -29,42 +31,18 @@ public class TUser implements UserDetails{
 
     private String telPhone;
 
-    public String getTelPhone() {
-        return telPhone;
-    }
-
-    public void setTelPhone(String telPhone) {
-        this.telPhone = telPhone;
-    }
-
     public TUser(String username, String password) {
         this.username = username;
         this.password = password;
         AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
     }
 
-    public TUser() {
-
-    }
-
     public TUser(String username, String password, boolean b, boolean b1, boolean b2, boolean b3, Collection<? extends GrantedAuthority> authorities) {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public TUser(String username, String password,
                 Collection<? extends GrantedAuthority> authorities) {
         this(username, password, true, true, true, true, authorities);
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -87,28 +65,10 @@ public class TUser implements UserDetails{
         return false;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
-    }
 }
