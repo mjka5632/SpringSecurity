@@ -8,6 +8,10 @@ import lombok.Data;
 @Data
 public class QQUserInfo {
     /**
+     * 新加的星座
+     */
+    private String constellation;
+    /**
      * 返回码
      */
     private String ret;

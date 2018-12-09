@@ -40,6 +40,12 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    /**
+     * @AuthenticationPrincipal
+     * 这个注解是返回的认证主要信息
+     * @param user
+     * @return
+     */
     @GetMapping("/me")
     public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
         return user;

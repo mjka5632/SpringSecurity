@@ -20,23 +20,24 @@ import java.io.IOException;
 @RestController
 public class ValidateCodeController {
     public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
-    /**
+    /*
      *
-     */
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
-    /**
+    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
+    */
+    /*
      * 图形验证码生成器
-     */
+
     @Autowired
    private ValidateCodeGenerator imageCodeGenerator;
+     */
     /*
       验证码生成器
        @Autowired
     private ValidateCodeGenerator SmsCodeGenerate;
      */
 
-    /**
+    /*
      * 短信供应商
      */
    /* @Autowired

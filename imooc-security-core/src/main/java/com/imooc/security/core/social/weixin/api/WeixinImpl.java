@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      *
@@ -53,6 +56,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     public WeixinUserInfo getUserInfo(String openId) {
         String url = URL_GET_USER_INFO + openId;
         String response = getRestTemplate().getForObject(url, String.class);
+        logger.info("获取UserInfo的信息" + response);
         if(StringUtils.contains(response, "errcode")) {
             return null;
         }
