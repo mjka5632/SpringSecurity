@@ -27,7 +27,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
      * 指定UserDetailsService实现类
      */
     @Autowired
-    @Qualifier("mobileDetailsService")
+//    @Qualifier("mobileDetailsService")
     private UserDetailsService userDetailsService;
 
     @Override

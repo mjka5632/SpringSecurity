@@ -1,4 +1,4 @@
-package com.imooc.security.browser.domain;
+package com.imooc.security.core.support;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

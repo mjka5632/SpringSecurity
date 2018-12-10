@@ -1,9 +1,9 @@
 package com.imooc.security.browser.controller;
 
-import com.imooc.security.browser.domain.SimpleResponse;
 import com.imooc.security.browser.domain.SocialUserInfo;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.support.SimpleResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Provider;
 
 //import com.imooc.security.browser.domain.User;
 
