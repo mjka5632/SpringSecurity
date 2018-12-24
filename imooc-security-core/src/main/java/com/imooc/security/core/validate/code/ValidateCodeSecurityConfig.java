@@ -11,12 +11,11 @@ import javax.servlet.Filter;
 
 /**
  * 验证码 配置
- *
  */
 @Component("validateCodeSecurityConfig")
 public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
-   private Filter validateCodeFilter;
+    private Filter validateCodeFilter;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

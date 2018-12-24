@@ -3,6 +3,7 @@ package com.imooc.security.app;
 import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,11 +21,16 @@ import org.springframework.social.security.SpringSocialConfigurer;
 public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
+
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
     private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+
+    @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+
     @Autowired
     private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
 
@@ -48,8 +54,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                 //处理失败返回
                 .failureHandler(imoocAuthenticationFailureHandler);
         //导入配置
-        http//.apply(validateCodeSecurityConfig)
-                //.and()
+        http.apply(validateCodeSecurityConfig)
+                .and()
                 //--------------身份认证
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
