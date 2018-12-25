@@ -5,8 +5,10 @@ import com.imooc.security.core.validate.code.ValidateCodeType;
 import com.imooc.security.core.validate.code.sms.ValidateCode;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
+@Component
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
     /**
      * 操作session工具类
