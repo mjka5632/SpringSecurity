@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * 短信验证码 配置
  */
 @Configuration
-public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain,HttpSecurity> {
+public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     @Autowired
     private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
@@ -34,12 +34,11 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
     public void configure(HttpSecurity http) throws Exception {
         //-----------过滤器
         SmsCodeAuthenticationFilter filter = new SmsCodeAuthenticationFilter();
-        //设置AuthenticationManager来做认证
+        //设置AuthenticationManager来做认证，他会找到AuthenticationManager的实现类ProviderManager
         filter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
         //成功失败处理器
         filter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
         filter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
-
 
         //------------provider
         SmsCodeAuthenticationProvider provider = new SmsCodeAuthenticationProvider();

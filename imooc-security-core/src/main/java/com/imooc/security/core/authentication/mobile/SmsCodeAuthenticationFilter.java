@@ -51,12 +51,14 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
             //实例化Token对象
             SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile);
             this.setDetails(request, authRequest);
+            //这里去找支持Token的Provider
             return this.getAuthenticationManager().authenticate(authRequest);
         }
     }
 
     /**
      * 获取手机号
+     *
      * @param request
      * @return
      */
@@ -73,7 +75,6 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         Assert.hasText(mobileParameter, "mobileParameter parameter must not be empty or null");
         this.mobileParameter = mobileParameter;
     }
-
 
 
     public void setPostOnly(boolean postOnly) {
