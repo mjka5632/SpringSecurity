@@ -33,12 +33,12 @@ public class ImoocAuthenticationSuccessHandle extends SavedRequestAwareAuthentic
     @Autowired
     private ObjectMapper objectMapper;
     /**
-     *加载client的服务
+     * 加载client的服务
      */
     @Autowired
     private ClientDetailsService clientDetailsService;
     /**
-     *创建token的服务
+     * 创建token的服务
      */
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;

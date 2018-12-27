@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppSocialAuthenticationFilterPostProcessor implements SocialAuthenticationFilterProcessor {
-
+    /**
+     * 成功处理器处理者
+     */
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
 

@@ -21,6 +21,7 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
     private boolean postOnly = true;
 
     protected OpenIdAuthenticationFilter() {
+        //这里匹配访问地址
         super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID, "POST"));
     }
 

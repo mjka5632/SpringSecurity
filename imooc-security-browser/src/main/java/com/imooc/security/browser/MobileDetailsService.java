@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * 手机号验证码登录
  */
-@Component
+//@Component
 public class MobileDetailsService implements UserDetailsService {
     private Logger logger= LoggerFactory.getLogger(getClass());
 

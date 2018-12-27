@@ -19,23 +19,24 @@ import java.io.IOException;
 
 /**
  * 登录失败处理器
- *可以实现 AuthenticationSuccessHandler接口达到相同功能
- *
+ * 可以实现 AuthenticationSuccessHandler接口达到相同功能
+ * <p>
  * why SimpleUrlAuthenticationFailureHandler？
  * 因为他是Spring默认失败处理器，这样可以直接用他的跳转方法
- *
+ * <p>
  * Spring默认失败处理方式：
- *
+ * <p>
  * 跳转至默认失败页
  */
 @Component
 //SimpleUrlAuthenticationFailureHandler
 public class ImoocAuthenticationFailureHandle extends SimpleUrlAuthenticationFailureHandler {
-    private Logger logger= LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
     private SecurityProperties securityProperties;
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         logger.info("登录失败");
@@ -45,7 +46,7 @@ public class ImoocAuthenticationFailureHandle extends SimpleUrlAuthenticationFai
          * or
          * 直接跳转
          */
-        if(LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())){
+        if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             //如果该方法在getWriter()方法被调用之前调用，那么响应的字符编码将仅从给出的内容类型中设置。
             // 该方法如果在getWriter()方法被调用之后或者在被提交之后调用，将不会设置响应的字符编码，
             // 在使用http协议的情况中，该方法设 置 Content-type实体报头。
@@ -54,7 +55,7 @@ public class ImoocAuthenticationFailureHandle extends SimpleUrlAuthenticationFai
             //设置状态码500：服务器内部异常
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
-        }else {
+        } else {
             super.onAuthenticationFailure(request, response, e);
         }
     }
