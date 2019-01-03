@@ -29,7 +29,6 @@ import java.io.IOException;
  * 跳转至默认失败页
  */
 @Component
-//SimpleUrlAuthenticationFailureHandler
 public class ImoocAuthenticationFailureHandle extends SimpleUrlAuthenticationFailureHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired

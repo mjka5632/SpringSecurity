@@ -70,4 +70,10 @@ public interface SecurityConstants {
      * SESSION过期URL
      */
     String DEFAULT_SESSION_INVALID = "/session/invalid";
+
+    /**
+     * 注册页
+     */
+    String DEFAULT_SOCIAL_SIGNUP = "/social/signUp";
+
 }

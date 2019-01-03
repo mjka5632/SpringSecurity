@@ -29,7 +29,6 @@ import java.io.IOException;
 @Component
 public class ImoocAuthenticationSuccessHandle extends SavedRequestAwareAuthenticationSuccessHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
-    //Spring Mvc启动时会自动注册一个ObjectMapper
     @Autowired
     private ObjectMapper objectMapper;
     /**
@@ -60,6 +59,7 @@ public class ImoocAuthenticationSuccessHandle extends SavedRequestAwareAuthentic
                 throw new UnapprovedClientAuthenticationException("clientSecret不匹配" + clientId);
 
             }
+
             TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
 
             OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
@@ -86,7 +86,7 @@ public class ImoocAuthenticationSuccessHandle extends SavedRequestAwareAuthentic
             throw new BadCredentialsException("Failed to decode basic authentication token");
         }
 
-        String token = new String(decoded, "utf-8");
+        String token = new String(decoded, "UTF-8");
         int delim = token.indexOf(":");
         if (delim == -1) {
             throw new BadCredentialsException("Invalid basic authentication token");

@@ -1,9 +1,9 @@
 package com.imooc.security.browser.controller;
 
-import com.imooc.security.browser.domain.SocialUserInfo;
 import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.support.SimpleResponse;
+import com.imooc.security.core.support.SocialUserInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +90,7 @@ public class BrowserSecurityController {
      * session失效
      * @return
      */
-    @GetMapping("/session/invalid")
+    @GetMapping(SecurityConstants.DEFAULT_SESSION_INVALID)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse sessionInvalid(){
         String msg="session失效";
