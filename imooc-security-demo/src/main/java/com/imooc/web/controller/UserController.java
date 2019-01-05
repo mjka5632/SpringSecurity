@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.imooc.security.app.social.AppSignUpUtils;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -40,11 +41,13 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private AppSignUpUtils appSignUpUtils;
+
     /**
-     * @AuthenticationPrincipal
-     * 这个注解是返回的认证主要信息
      * @param user
      * @return
+     * @AuthenticationPrincipal 这个注解是返回的认证主要信息
      */
     @GetMapping("/me")
     public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
@@ -54,8 +57,8 @@ public class UserController {
     @PostMapping("/regist")
     public void add(User user, HttpServletRequest request) {
         String username = user.getUsername();
-        providerSignInUtils.doPostSignUp(username, new ServletWebRequest(request));
-
+//        providerSignInUtils.doPostSignUp(username, new ServletWebRequest(request));
+        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), username);
     }
 
     @DeleteMapping("/{id:\\d+}")

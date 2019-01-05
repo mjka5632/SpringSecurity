@@ -79,7 +79,9 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                         SecurityConstants.DEFAULT_SESSION_INVALID,
                         SecurityConstants.DEFAULT_USER_INFO,
                         SecurityConstants.DEFAULT_USER_REGIST,
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX,
+                        SecurityConstants.DEFAULT_SOCIAL_SIGNUP
+                                + "/*").permitAll()
                 //任何请求
                 .anyRequest()
 
