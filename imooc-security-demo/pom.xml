@@ -15,7 +15,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 		<!-- 引用browser项目的依赖 -->
-<!--		<dependency>
+	<!--	<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-browser</artifactId>
 			<version>${imooc.security.version}</version>

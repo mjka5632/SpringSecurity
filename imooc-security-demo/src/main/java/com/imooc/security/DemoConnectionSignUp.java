@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * 自动注册新用户
  */
-@Component
+//@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
 
 

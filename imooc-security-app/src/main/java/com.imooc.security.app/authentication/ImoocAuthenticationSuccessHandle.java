@@ -1,6 +1,5 @@
 package com.imooc.security.app.authentication;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;

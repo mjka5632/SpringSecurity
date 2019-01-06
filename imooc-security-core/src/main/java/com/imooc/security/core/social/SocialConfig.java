@@ -39,6 +39,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     /**
      * 去查找ConnectionFactory
      * [TextEncryptor:用来加解密的工具  Encryptors.noOpText()数据不加密]
@@ -69,6 +72,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         ImoocSpringSocialConfigurer socialConfigurer = new ImoocSpringSocialConfigurer(securityProperties.getSocial().getFilterProcessesUrl());
         //指定注册页面地址
         socialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        socialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return socialConfigurer;
     }
 

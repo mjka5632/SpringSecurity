@@ -4,10 +4,12 @@ import com.imooc.security.core.social.ImoocSpringSocialConfigurer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 /**
  *加载Bean之后的处理器
  */
+@Component
 public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 
     @Override
