@@ -25,6 +25,30 @@ public interface SecurityConstants {
      */
     String DEFAULT_LOGIN_PROCESSING_URL_OPENID = "/authentication/openid";
     /**
+     * 获取第三方用户信息的url
+     */
+    String DEFAULT_SOCIAL_USER_INFO_URL = "/social/user";
+    /**
+     * 获取用过个人信息
+     */
+    String DEFAULT_USER_INFO = "user/me";
+    /**
+     * 用户注册URL
+     */
+    String DEFAULT_USER_REGIST = "/user/regist";
+    /**
+     * SESSION过期URL
+     */
+    String DEFAULT_SESSION_INVALID = "/session/invalid";
+    /**
+     * 签约URL
+     */
+    String DEFAULT_SOCIAL_SIGNUP = "/social/signUp";
+    /**
+     * session失效默认的跳转地址
+     */
+    String DEFAULT_SESSION_INVALID_URL = "/imooc-session-invalid.html";
+    /**
      * 默认登录页面
      *
      * @see SecurityController
@@ -50,30 +74,6 @@ public interface SecurityConstants {
      * providerId参数名
      */
     String DEFAULT_PARAMETER_NAME_PROVIDERID = "providerId";
-    /**
-     * session失效默认的跳转地址
-     */
-    String DEFAULT_SESSION_INVALID_URL = "/imooc-session-invalid.html";
-    /**
-     * 获取第三方用户信息的url
-     */
-    String DEFAULT_SOCIAL_USER_INFO_URL = "/social/user";
-    /**
-     * 获取用过个人信息
-     */
-    String DEFAULT_USER_INFO = "user/me";
-    /**
-     * 用户注册URL
-     */
-    String DEFAULT_USER_REGIST = "/user/regist";
-    /**
-     * SESSION过期URL
-     */
-    String DEFAULT_SESSION_INVALID = "/session/invalid";
 
-    /**
-     * 注册页
-     */
-    String DEFAULT_SOCIAL_SIGNUP = "/social/signUp";
 
 }

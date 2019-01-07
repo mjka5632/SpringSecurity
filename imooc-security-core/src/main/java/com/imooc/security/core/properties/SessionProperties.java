@@ -1,5 +1,8 @@
 package com.imooc.security.core.properties;
 
+import lombok.Data;
+
+@Data
 public class SessionProperties {
     /**
      * 允许最大存在的sessions数，默认为1
@@ -15,27 +18,4 @@ public class SessionProperties {
      */
     private String invalidSessionUrl = SecurityConstants.DEFAULT_SESSION_INVALID_URL;
 
-    public int getMaximumSessions() {
-        return maximumSessions;
-    }
-
-    public void setMaximumSessions(int maximumSessions) {
-        this.maximumSessions = maximumSessions;
-    }
-
-    public boolean isMaxSessionsPreventsLogin() {
-        return maxSessionsPreventsLogin;
-    }
-
-    public void setMaxSessionsPreventsLogin(boolean maxSessionsPreventsLogin) {
-        this.maxSessionsPreventsLogin = maxSessionsPreventsLogin;
-    }
-
-    public String getInvalidSessionUrl() {
-        return invalidSessionUrl;
-    }
-
-    public void setInvalidSessionUrl(String invalidSessionUrl) {
-        this.invalidSessionUrl = invalidSessionUrl;
-    }
 }

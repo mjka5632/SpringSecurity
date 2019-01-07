@@ -1,6 +1,7 @@
 package com.imooc.security.core.properties;
 
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 
 @ConfigurationProperties(prefix = "imooc.security")
+@Data
 public class SecurityProperties {
     //读取以imooc.security.browser开头的配置
     private BrowserProperties browser = new BrowserProperties();
@@ -18,28 +20,4 @@ public class SecurityProperties {
     private ValidateCodeProperties code = new ValidateCodeProperties();
 
     private SocialProperties social = new SocialProperties();
-
-    public ValidateCodeProperties getCode() {
-        return code;
-    }
-
-    public void setCode(ValidateCodeProperties code) {
-        this.code = code;
-    }
-
-    public SocialProperties getSocial() {
-        return social;
-    }
-
-    public void setSocial(SocialProperties social) {
-        this.social = social;
-    }
-
-    public BrowserProperties getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(BrowserProperties browser) {
-        this.browser = browser;
-    }
 }

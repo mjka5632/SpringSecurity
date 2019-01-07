@@ -10,11 +10,11 @@ public class ValidateCodeProperties {
     /**
      * 图形验证码
      */
-    private ImageCodeProperties image=new ImageCodeProperties();
+    private ImageCodeProperties image = new ImageCodeProperties();
 
     /**
      * 验证码
      */
-    private SmsCodeProperties sms=new SmsCodeProperties();
+    private SmsCodeProperties sms = new SmsCodeProperties();
 
 }
