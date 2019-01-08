@@ -12,6 +12,9 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 验证码操作Redis工具类
+ */
 @Component
 public class RedisValidateCodeRepository implements ValidateCodeRepository {
     /**

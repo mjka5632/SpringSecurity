@@ -120,7 +120,6 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*").permitAll()
                 //任何请求
             .anyRequest()
-
                 //都需要做身份认证
                 .authenticated()
                 .and()

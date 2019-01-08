@@ -6,6 +6,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
+/**
+ * 处理APPSocial登录成功的方式
+ */
 @Component
 public class AppSocialAuthenticationFilterPostProcessor implements SocialAuthenticationFilterProcessor {
     /**

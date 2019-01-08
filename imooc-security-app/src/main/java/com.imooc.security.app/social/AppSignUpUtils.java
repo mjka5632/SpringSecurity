@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.concurrent.TimeUnit;
+
+/**
+ * APP跟第三方工具类
+ */
 @Component
 public class AppSignUpUtils {
     @Autowired
@@ -22,7 +26,8 @@ public class AppSignUpUtils {
     private ConnectionFactoryLocator connectionFactoryLocator;
 
     /**
-     * 保存第三方用户信息
+     * 保存第三方用户信息(签约)
+     *
      * @param request
      * @param connectionData
      */
@@ -32,6 +37,7 @@ public class AppSignUpUtils {
     }
 
     /**
+     * 绑定用户信息插入数据(注册)
      *
      * @param request
      * @param userId
@@ -53,6 +59,7 @@ public class AppSignUpUtils {
 
     /**
      * 命名key
+     *
      * @param request
      * @return
      */

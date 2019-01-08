@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 以openId登录方式的过滤器
+ * <p>
  * 【第三步】Filter
  * 验证流程see{@link OpenIdAuthenticationSecurityConfig}
  */
@@ -21,7 +23,7 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
     private boolean postOnly = true;
 
     protected OpenIdAuthenticationFilter() {
-        //这里匹配访问地址
+        //这里是拦截访问的地址
         super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID, "POST"));
     }
 

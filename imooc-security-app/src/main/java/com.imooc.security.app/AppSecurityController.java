@@ -15,7 +15,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
+ * APP 第三方签约（绑定和未绑定之间的状态）
  */
 @RestController
 public class AppSecurityController {
@@ -24,6 +24,12 @@ public class AppSecurityController {
     @Autowired
     private AppSignUpUtils signUpUtils;
 
+    /**
+     * 第三方签约（绑定和未绑定之间的状态）
+     *
+     * @param request
+     * @return
+     */
     @GetMapping(SecurityConstants.DEFAULT_SOCIAL_SIGNUP)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
@@ -35,7 +41,7 @@ public class AppSecurityController {
         userInfo.setProviderUserId(connection.getKey().getProviderUserId());
         userInfo.setNickname(connection.getDisplayName());
         userInfo.setHeadimg(connection.getImageUrl());
-
+        //第三方信息保存redis中
         signUpUtils.saveConnectionData(new ServletWebRequest(request), connection.createData());
         return userInfo;
     }

@@ -24,6 +24,8 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
     public static final String URL_ACCESS_TOKEN = "https://graph.qq.com/oauth2.0/token";
 
     /**
+     * 构造方法
+     *
      * @param appId     QQ互联提供的ID
      * @param appSecret QQ互联提供的密码
      */

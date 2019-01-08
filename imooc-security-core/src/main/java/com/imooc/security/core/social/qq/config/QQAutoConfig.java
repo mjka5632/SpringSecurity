@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.social.connect.ConnectionFactory;
 
 /**
- * 自动配置QQ
+ * QQ配置
  */
 @Configuration
 //表示imooc.security.social.qq.app-id 这个配置项配置了配置文件才生效

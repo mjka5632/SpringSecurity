@@ -22,19 +22,24 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
      */
     public static final String URL_GET_USERINFO = "https://graph.qq.com/user/get_user_info?oauth_consumer_key=%s&openid=%s";
 
-    //申请QQ登录，分配给应用的appid
+    /**
+     * 申请QQ登录，分配给应用的appid
+     */
     private String appId;
-    //QQ用户对应的ID
+
+    /**
+     * QQ用户对应的ID
+     */
     private String openId;
 
     /**
-     * 通过this关键字保存openId
      * @param accessToken
      * @param appId
      */
     public QQImpl(String accessToken, String appId) {
         //TokenStrategy.ACCESS_TOKEN_PARAMETER 作为查询参数携带
         super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
+        //通过this关键字保存openId
         this.appId = appId;
 
         //替换URL_GET_OPENID中的%s

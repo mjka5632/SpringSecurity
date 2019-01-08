@@ -22,9 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    /**
-     *
-     */
     private ObjectMapper objectMapper = new ObjectMapper();
     /**
      * 获取用户信息的url
@@ -50,7 +47,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     }
 
     /**
-     * 获取微信用户信息。
+     * 获取微信用户信息
      */
     @Override
     public WeixinUserInfo getUserInfo(String openId) {

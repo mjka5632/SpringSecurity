@@ -56,7 +56,9 @@ public class QQAUth2Template extends OAuth2Template {
     protected RestTemplate createRestTemplate() {
         //调用父类的createRestTemplate
         RestTemplate template = super.createRestTemplate();
-        //父类基础上增加可以处理Content type为text/html的Convert
+      /*1、text/html的意思是将文件的content-type设置为text/html的形式，浏览器在获取到这种文件时会自动调用html的解析器对文件进行相应的处理。
+        2、text/plain的意思是将文件设置为纯文本的形式，浏览器在获取到这种文件时并不会对其进行处理。*/
+        //父类基础上增加可以处理Content type为text/plain的Convert
         template.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("utf-8")));
         return template;
     }

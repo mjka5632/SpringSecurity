@@ -72,17 +72,19 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 //url无需认证
                 .antMatchers(
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+ "/*",
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM,
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getLoginPage(),
-                        securityProperties.getBrowser().getSignOutUrl(),
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
+                        SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL,
                         SecurityConstants.DEFAULT_SESSION_INVALID,
                         SecurityConstants.DEFAULT_USER_INFO,
                         SecurityConstants.DEFAULT_USER_REGIST,
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+ "/*",
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_OPENID,
-                        SecurityConstants.DEFAULT_SOCIAL_SIGNUP
+                        SecurityConstants.DEFAULT_SOCIAL_SIGNUP,
+                        securityProperties.getBrowser().getSignUpUrl(),
+                        securityProperties.getBrowser().getLoginPage(),
+                        securityProperties.getBrowser().getSignOutUrl()
                                 ).permitAll()
                 //任何请求
                 .anyRequest()

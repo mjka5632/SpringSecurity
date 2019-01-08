@@ -18,10 +18,11 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import javax.sql.DataSource;
 
 /**
+ * 社交登录配置类
  *
+ * @EnableSocial注解 启动Spring social相关特性
  */
 @Configuration
-//启动Spring social相关特性
 @EnableSocial
 @Order(10)
 public class SocialConfig extends SocialConfigurerAdapter {
@@ -70,7 +71,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     public SpringSocialConfigurer imoocSocialSecurityConfig() {
         //修改默认的FilterProcessesUrl
         ImoocSpringSocialConfigurer socialConfigurer = new ImoocSpringSocialConfigurer(securityProperties.getSocial().getFilterProcessesUrl());
-        //指定注册页面地址
+        //指定签约页面地址
         socialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
         socialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return socialConfigurer;
