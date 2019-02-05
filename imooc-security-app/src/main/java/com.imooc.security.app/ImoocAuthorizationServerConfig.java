@@ -6,14 +6,19 @@ import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @EnableAuthorizationServer 当做认证服务器
@@ -21,6 +26,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -33,11 +39,42 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
     @Autowired
     private TokenStore tokenStore;
 
+    /**
+     * JWT Token转换器
+     * {@link TokenStoreConfig}
+     */
+    @Autowired(required = false)
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    /**
+     * Token增强器
+     * {@link TokenStoreConfig}
+     */
+    @Autowired(required = false)
+    private TokenEnhancer jwtTokenEnhancer;
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
                 .userDetailsService(userDetailsService);
+        //如果两个都有
+        if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
+            //增强器链
+            TokenEnhancerChain chain = new TokenEnhancerChain();
+
+            //增强器配置存放到List
+            List<TokenEnhancer> enhancers = new ArrayList<>();
+
+            enhancers.add(jwtTokenEnhancer);
+            enhancers.add(jwtAccessTokenConverter);
+            //设置增强器
+            chain.setTokenEnhancers(enhancers);
+
+            endpoints
+                    .tokenEnhancer(chain)
+                    .accessTokenConverter(jwtAccessTokenConverter);
+        }
 
     }
 

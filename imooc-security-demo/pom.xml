@@ -15,7 +15,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
 		<!-- 引用browser项目的依赖 -->
-	<!--	<dependency>
+		<!--<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-browser</artifactId>
 			<version>${imooc.security.version}</version>
@@ -54,6 +54,11 @@
 		<dependency>
 			<groupId>com.github.tomakehurst</groupId>
 			<artifactId>wiremock</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
 		</dependency>
 
 	</dependencies>
